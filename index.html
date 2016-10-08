@@ -157,6 +157,7 @@ html{
     <input type="button" id="bt31" onclick="jsq(this.id)" value="31" class="buttons">
     <input type="button" id="bt32" onclick="jsq(this.id)" value="32" class="buttons">
      <!--第五排-->
+    <input type="button" id="bt33" onclick="jsq(this.id)" value="33" class="buttons">
     <input type="button" id="Back" onclick="tuiGe()" value="回删" class="buttons">
     <input type="button" id="Clear" onclick="clearNum()" value="清空" class="buttons">
     <input type="button" id="Generate" onclick="generate()" value="生成" class="buttons">
@@ -306,11 +307,11 @@ html{
       num3=Number(document.getElementById("number3").value);
       num4=Number(document.getElementById("number4").value);
       var totalresult="";
-      for (var i = 1; i < 33; i++) {
+      for (var i = 1; i < 34; i++) {
         if(i!=num1&&i!=num2&&i!=num3&&i!=num4)
         {
           num5=i;
-          for (var j = 1; j < 33; j++) {
+          for (var j = 1; j < 34; j++) {
           if(j!=num1&&j!=num2&&j!=num3&&j!=num4&&j!=i)
           {
             num6=j;
