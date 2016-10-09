@@ -308,6 +308,7 @@ html{
   }
   function generate() {
     //生成彩票
+    var number1=0,number2=0,number3=0,number4=0,number5=0,number6=0;
     var numarray = new Array(0,0,0,0,0,0);
     var count=0;
     var piece=40;
@@ -318,20 +319,26 @@ html{
     }
     else
     {
-      numarray[0]=Number(document.getElementById("number1").value);
-      numarray[1]=Number(document.getElementById("number2").value);
-      numarray[2]=Number(document.getElementById("number3").value);
-      numarray[3]=Number(document.getElementById("number4").value);
+      number1=Number(document.getElementById("number1").value);
+      number2=Number(document.getElementById("number2").value);
+      number3=Number(document.getElementById("number3").value);
+      number4=Number(document.getElementById("number4").value);
       var partresult="";
       var tempresult="";
       for (var i = 1; i < 34; i++) {
-        if(i!=numarray[0]&&i!=numarray[1]&&i!=numarray[2]&&i!=numarray[3])
+        if(i!=number1&&i!=number2&&i!=number3&&i!=number4)
         {
-          numarray[4]=i;
+          number5=i;
           for (var j = i+1; j < 34; j++) {
-          if(j!=numarray[0]&&j!=numarray[1]&&j!=numarray[2]&&j!=numarray[3]&&j!=i)
+          if(j!=number1&&j!=number2&&j!=number3&&j!=number4&&j!=i)
           {
-            numarray[5]=j;
+            number6=j;
+            numarray[0]=number1;
+            numarray[1]=number2;
+            numarray[2]=number3;
+            numarray[3]=number4;
+            numarray[4]=number5;
+            numarray[5]=number6;
             numarray.sort(function(a,b){return a-b});
             tempresult=numarray[0]+'&nbsp' +numarray[1]+'&nbsp' +numarray[2]+'&nbsp' +numarray[3]+'&nbsp' +numarray[4]+'&nbsp' +numarray[5]+ "<br/>";
             if(count<piece)
