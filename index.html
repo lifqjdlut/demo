@@ -9,17 +9,17 @@
   margin:0;
   padding:0;
   box-sizing: border-box;
-  font: 14px Arial,sans-serif;
+  font: 30px Arial,sans-serif;
 }
 html{
   height:100%;
-  background-color:lightslategrey;
+  background-color:darkgrey;
 }
  
 #ticket{
   margin: 15px auto;
-  width:523px;
-  height:1000px;
+  width:100%;
+  height:100%;
   border: 1px solid lightgray;
   background-color:darkgrey;
   padding:15px;
@@ -40,32 +40,24 @@ html{
 }
 /*screen*/
 #shuRu{
-  margin-top:15px;
+   margin-top:40px;
 }
 .screen{
   display:inline;
-  margin-right: 30px;
-  width:60px;
-  height:50px;
+  margin-right:100px;
+  width:120px;
+  height:120px;
   padding-right:10px;
   text-align: center;
-  font-size:20px;
+  font-size:60px;
 }
-.nummessage{
-  display:inline;
-  margin-right: 20px;
-  width:50px;
-  height:40px;
-  padding-right:10px;
-  text-align: center;
-  font-size:15px;
-}
+
 /*按键边框*/
 #keys{
   border:1px solid lightgray;
-  height:300px;
+  height:450px;
   margin-top:25px;
-  padding:8px;
+  padding:10px;
 }
 #keys .last{
   margin-right:0px;
@@ -80,9 +72,17 @@ html{
 /*按键样式*/
 #keys .buttons{
   float:left;
-  width: 42px;
-  height: 42px;
-  border-radius:26px;
+  width: 80px;
+  height: 80px;
+  border-radius:40px;
+  text-align:center;
+  background-color:lightgray;
+  margin: 0 17px 17px 0;
+}
+#keys .button2s{
+  float:left;
+  width: 80px;
+  height: 80px;
   text-align:center;
   background-color:lightgray;
   margin: 0 17px 17px 0;
@@ -91,31 +91,40 @@ html{
   border:1px solid lightgray;
   height:500px;
   overflow:auto;
-  margin-top:20px;
+  margin-top:65px;
   padding:8px;
+}
+#fanye{
+ margin-top:10px;
+}
+#fanye .pagetxt{
+  width: 120px;
+  height: 50px;
+  text-align:center;
+  margin: 0 170px 17px 0;
+}
+#fanye .buttons{
+  width: 120px;
+  height: 50px;
+  text-align:center;
+  background-color:lightgray;
+  margin: 0 170px 17px 0;
 }
   </style>
 </head>
 <body onload="onLoad()">
 <div id="ticket">
   <div class="LOGO">
-    <span class="name">彩票生成工具</span>
-    <span class="verson">@江乾峰 v1.0</span>
+    <span class="name">号码生成助手</span>
+    <span class="verson">@jqf v1.1</span>
   </div>
   <div id="shuRu">
     <!--screen输入栏-->
-     <div class="screen">
-      <span class="nummessage">第一个号</span>
-      <span class="nummessage">第二个号</span>
-      <span class="nummessage">第三个号</span>
-      <span class="nummessage">第四个号</span>
-      
-    </div>
     <div class="screen">
-      <input type="text" id="number1" name="number1" class="screen" value="" onfocus="jsq(this)">
-      <input type="text" id="number2" name="number2" class="screen" value="" onfocus="jsq(this)">
-      <input type="text" id="number3" name="number3" class="screen" value="" onfocus="jsq(this)">
-      <input type="text" id="number4" name="number4" class="screen" value="" onfocus="jsq(this)">
+      <input type="text" id="number1" name="number1" class="screen" value="" onfocus="jsq(this)" readonly='readonly'>
+      <input type="text" id="number2" name="number2" class="screen" value="" onfocus="jsq(this)" readonly='readonly'>
+      <input type="text" id="number3" name="number3" class="screen" value="" onfocus="jsq(this)" readonly='readonly'>
+      <input type="text" id="number4" name="number4" class="screen" value="" onfocus="jsq(this)" readonly='readonly'>
     </div>
   </div>
   <div id="keys">
@@ -158,21 +167,29 @@ html{
     <input type="button" id="bt32" onclick="jsq(this.id)" value="32" class="buttons">
      <!--第五排-->
     <input type="button" id="bt33" onclick="jsq(this.id)" value="33" class="buttons">
-    <input type="button" id="Back" onclick="tuiGe()" value="回删" class="buttons">
-    <input type="button" id="Clear" onclick="clearNum()" value="清空" class="buttons">
-    <input type="button" id="Generate" onclick="generate()" value="生成" class="buttons">
+    <input type="button" id="Back" onclick="tuiGe()" value="回删" class="button2s">
+    <input type="button" id="Clear" onclick="clearNum()" value="清空" class="button2s">
+    <input type="button" id="Generate" onclick="generate()" value="生成" class="button2s" style="color:red;">
   </div>
 
   <div class="footer">
-    <span class="aside">说明：点击数字按钮选择号码，选择四个号码后即可生成所有组合<br/>结果如下：</span>
+    <span class="aside">说明：点击数字按钮选择号码，选择四个号码后即可生成所有组合<br/>生成结果如下(每页显示40个号码)：</span>
   </div>
 
   <div id ="showres">
   <span id="res" ></span>
   </div>
+  <div id ="fanye" style="display:none;">
+    <input type="button" id="prepage" onclick="prePage()" value="上一页" class="buttons"  >
+    <span id="currentpage" class="pagetxt">第1页</span>
+    <input type="button" id="nextpage" onclick="nextPage()" value="下一页" class="buttons">
+  
+  </div>
 </div>
 <script>
   var num = 0;
+  var stringarray=new Array("","","","","","","","","","","");//存放最后结果
+  var currentpagenum=0;
   function jsq(num) {
     //点击数字按钮，显示输入结果
     if(document.getElementById("number1").value == "")//第一个数未被选择
@@ -247,7 +264,8 @@ html{
     //给span添加文本元素
     spanNode.innerHTML="";
     document.getElementById("number1").focus();
-
+    var pageitems = document.getElementById("fanye");//显示上一页下一页按钮
+    pageitems.style.display="none";
   }
   function tuiGe() {
     //退格
@@ -290,46 +308,103 @@ html{
   }
   function generate() {
     //生成彩票
-    var num1 = 0; // 定义第一个输入的数据
-    var num2 = 0; // 定义第二个输入的数据
-    var num3 = 0; // 定义第三个输入的数据
-    var num4 = 0; // 定义第四个输入的数据
-    var num5 = 0; // 定义第五个输入的数据
-    var num6 = 0; // 定义第六个输入的数据
+    var numarray = new Array(0,0,0,0,0,0);
+    var count=0;
+    var piece=40;
+    var page=0;
     if(document.getElementById("number4").value == "")//第四个空无值
     {
       alert("请先选择四个号码！");
     }
     else
     {
-      num1=Number(document.getElementById("number1").value);
-      num2=Number(document.getElementById("number2").value);
-      num3=Number(document.getElementById("number3").value);
-      num4=Number(document.getElementById("number4").value);
-      var totalresult="";
+      numarray[0]=Number(document.getElementById("number1").value);
+      numarray[1]=Number(document.getElementById("number2").value);
+      numarray[2]=Number(document.getElementById("number3").value);
+      numarray[3]=Number(document.getElementById("number4").value);
+      var partresult="";
+      var tempresult="";
       for (var i = 1; i < 34; i++) {
-        if(i!=num1&&i!=num2&&i!=num3&&i!=num4)
+        if(i!=numarray[0]&&i!=numarray[1]&&i!=numarray[2]&&i!=numarray[3])
         {
-          num5=i;
-          for (var j = 1; j < 34; j++) {
-          if(j!=num1&&j!=num2&&j!=num3&&j!=num4&&j!=i)
+          numarray[4]=i;
+          for (var j = i+1; j < 34; j++) {
+          if(j!=numarray[0]&&j!=numarray[1]&&j!=numarray[2]&&j!=numarray[3]&&j!=i)
           {
-            num6=j;
-            totalresult+=num1+'&nbsp' +num2+'&nbsp' +num3+'&nbsp' +num4+'&nbsp' +num5+'&nbsp' +num6+ "<br/>";
+            numarray[5]=j;
+            numarray.sort(function(a,b){return a-b});
+            tempresult=numarray[0]+'&nbsp' +numarray[1]+'&nbsp' +numarray[2]+'&nbsp' +numarray[3]+'&nbsp' +numarray[4]+'&nbsp' +numarray[5]+ "<br/>";
+            if(count<piece)
+            {
+              partresult+=tempresult;
+              count++;
+            }
+            else
+            {
+              count=1;
+              stringarray[page]=partresult;//将40个结果存入字符串数组中
+              partresult=tempresult;
+              page++;
+            }
+
           }
         };
         }
       };
+      stringarray[page]=partresult;//将最后一次结果存入字符串数组中
       //获取span对象
       var spanNode = document.getElementById("res");
       //给span添加文本元素
-      spanNode.innerHTML=totalresult;
+      spanNode.innerHTML=stringarray[currentpagenum];//显示第一页结果
+      var pageitems = document.getElementById("fanye");//显示上一页下一页按钮
+      pageitems.style.display="block";
     }
     
   }
   function onLoad(){
     //加载完毕后光标自动对应到输入框
     document.getElementById("screenName").focus();
+  }
+  function prePage(){
+    //上一页
+     //下一页
+    currentpagenum--;
+    if (currentpagenum<0) 
+    {
+      currentpagenum++;
+      alert("已经是第一页！");
+    }
+    else
+    {
+      //获取span对象
+      var spanNode = document.getElementById("res");
+      //给span添加文本元素
+      spanNode.innerHTML=stringarray[currentpagenum];//显示第一页结果
+      var spanPagenumber = document.getElementById("currentpage");
+      //给span添加文本元素
+      var realpage=currentpagenum+1;
+      spanPagenumber.innerHTML='第'+realpage+'页';//显示第一页结果
+    }
+  }
+  function nextPage(){
+    //下一页
+    currentpagenum++;
+    if (currentpagenum>10) 
+    {
+      currentpagenum--;
+      alert("最后一页，已经全部显示完毕！");
+    }
+    else
+    {
+      //获取span对象
+      var spanNode = document.getElementById("res");
+      //给span添加文本元素
+      spanNode.innerHTML=stringarray[currentpagenum];//显示第一页结果
+      var spanPagenumber = document.getElementById("currentpage");
+      //给span添加文本元素
+      var realpage=currentpagenum+1;
+      spanPagenumber.innerHTML='第'+realpage+'页';//显示第一页结果
+    }
   }
 </script>
 </body>
